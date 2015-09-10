@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<h:body>
+	<h1>Completed to-do list</h1>
+
+
+	<label>User:</label>
+	<span>#{reportBean.action}</span>
+	<span>#{reportBean.user.username}</span>
+	<h:dataTable value="#{reportBean.user.todolists}" var="list"
+		styleClass="order-table" headerClass="order-table-header"
+		rowClasses="order-table-odd-row,order-table-even-row">
+
+		<c:if test="#{list.todostatus.statustype == 'Complished'}">
+			<h:column>
+				<!-- column header -->
+				<f:facet name="header">Description</f:facet>
+				<!-- row record -->
+	    				#{list.description}
+	    	</h:column>
+	
+			<h:column>
+				<f:facet name="header">Date completed</f:facet>
+	    				#{list.datecompleted}
+	    	</h:column>
+	
+			<h:column>
+				<f:facet name="header">Due date</f:facet>
+	    				#{list.duedate}
+	    	</h:column>
+	
+			<h:column>
+				<f:facet name="header">Priority</f:facet>
+	    				#{list.priorityid}
+	    	</h:column>
+	    	
+	    	<h:column>
+				<f:facet name="header">Status</f:facet>
+	    				#{list.todostatus.statustype}
+	    	</h:column>
+		</c:if>
+	</h:dataTable>
+	
+	<h:form>
+		<h:commandButton id="report" action="report?faces-redirect=true" value="Report"/>
+    </h:form>
+</h:body>
+</html>
